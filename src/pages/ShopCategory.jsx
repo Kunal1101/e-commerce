@@ -42,7 +42,7 @@ const ShopCategory = () => {
               </p>
               <button
                 onClick={() => handleAddToCart(product)} // Pass the product as argument
-                className="mt-4 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+                className="mt-4 cursor-pointer w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
               >
                 Add To Cart
               </button>
