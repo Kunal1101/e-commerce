@@ -9,11 +9,85 @@ const Cart = () => {
     return <p>No items in the cart.</p>; // Fallback message if cart is empty or undefined
   }
 
+  const removeFromCart = (id) => {
+    setCart(cartItems.filter((item) => item.id !== id));
+  };
+
+  const updateQuantity = (id, newQuantity) => {
+    setCart(
+      cartItems.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  // const calculateTotal = () => {
+  //   return cartItems
+  //     .reduce((total, item) => total + item.price * item.quantity, 0)
+  //     .toFixed(2);
+  // };
+
   return (
     <div>
-      {cartItems.map((item) => (
-        <span key={item.id}>{item.title}</span>
-      ))}
+      <div className="container mx-auto max-w-full p-8 bg-gray-100">
+        <h2 className="text-3xl font-bold mb-6">Shopping Cart</h2>
+        <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+          <thead className="bg-gray-200 text-gray-700">
+            <tr>
+              <th className="py-2 px-4 text-left">Product</th>
+              <th className="py-2 px-4 text-left">Price</th>
+              {/* <th className="py-2 px-4 text-left">Quantity</th> */}
+              {/* <th className="py-2 px-4 text-left">Total</th> */}
+              <th className="py-2 px-4 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.map((item) => (
+              <tr key={item.id} className="border-b border-gray-200">
+                <td className="py-3 px-4">
+                  <div className="flex items-center">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-12 h-12 object-cover mr-4"
+                    />
+                    <span>{item.title}</span>
+                  </div>
+                </td>
+                <td className="py-3 px-4">${item.price.toFixed(2)}</td>
+                {/* <td className="py-3 px-4">
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    min="1"
+                    onChange={(e) =>
+                      updateQuantity(item.id, parseInt(e.target.value))
+                    }
+                    className="w-16 p-1 border border-gray-300 rounded-md text-center"
+                  />
+                </td> */}
+                {/* <td className="py-3 px-4">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </td> */}
+                <td className="py-3 px-4">
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="mt-6 flex justify-between items-center">
+          {/* <h3 className="text-xl font-semibold">Total: ${calculateTotal()}</h3> */}
+          <button className="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
+            Checkout
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
