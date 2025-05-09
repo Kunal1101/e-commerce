@@ -17,19 +17,11 @@ const Cart = () => {
     dispatch(removeItem(item));
   };
 
-  const updateQuantity = (id, newQuantity) => {
-    setCart(
-      cartItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
+  const calculateTotal = () => {
+    return cartItems
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
   };
-
-  // const calculateTotal = () => {
-  //   return cartItems
-  //     .reduce((total, item) => total + item.price * item.quantity, 0)
-  //     .toFixed(2);
-  // };
 
   return (
     <div>
@@ -78,7 +70,7 @@ const Cart = () => {
           </tbody>
         </table>
         <div className="mt-6 flex justify-between items-center">
-          {/* <h3 className="text-xl font-semibold">Total: ${calculateTotal()}</h3> */}
+          <h3 className="text-xl font-semibold">Total: ${calculateTotal()}</h3>
           <button className="bg-green-500 text-white px-6 py-3 rounded-md hover:bg-green-600">
             Checkout
           </button>
