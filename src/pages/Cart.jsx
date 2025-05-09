@@ -41,7 +41,7 @@ const Cart = () => {
               <th className="py-2 px-4 text-left">Product</th>
               <th className="py-2 px-4 text-left">Price</th>
               <th className="py-2 px-4 text-left">Quantity</th>
-              {/* <th className="py-2 px-4 text-left">Total</th> */}
+              <th className="py-2 px-4 text-left">Total</th>
               <th className="py-2 px-4 text-left">Actions</th>
             </tr>
           </thead>
@@ -60,20 +60,11 @@ const Cart = () => {
                 </td>
                 <td className="py-3 px-4">${item.price.toFixed(2)}</td>
                 <td className="py-3 px-4">
-                  <span></span>
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    min="1"
-                    onChange={(e) =>
-                      updateQuantity(item.id, parseInt(e.target.value))
-                    }
-                    // className="w-16 p-1 border border-gray-300 rounded-md text-center"
-                  />
+                  <span>{item.quantity}</span>
                 </td>
-                {/* <td className="py-3 px-4">
+                <td className="py-3 px-4">
                   ${(item.price * item.quantity).toFixed(2)}
-                </td> */}
+                </td>
                 <td className="py-3 px-4">
                   <button
                     onClick={() => removeFromCart(item)}
