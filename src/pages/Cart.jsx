@@ -1,14 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from "../store/cart";
+import EmptyCart from "../components/EmptyCart";
 
 const Cart = () => {
   // Access cartItems from the Redux store
   const cartItems = useSelector((state) => state.cartItems); // Ensure correct path
   const dispatch = useDispatch();
 
+  // If cart is empty
   if (!cartItems || cartItems.length === 0) {
-    return <p>No items in the cart.</p>; // Fallback message if cart is empty or undefined
+    return <EmptyCart />;
   }
 
   const removeFromCart = (item) => {
