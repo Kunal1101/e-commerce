@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 
 function App() {
   return (
-    <div>
+    <div className="bg-gray-100 h-lvh">
       <BrowserRouter>
         <Navbar />
         <Routes>

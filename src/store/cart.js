@@ -1,25 +1,56 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-// Initial state for the cart
 const initialState = {
-  cartItems: [], // Array of items in the cart
+  cartItems: [],
   cartCount: 0,
 };
 
-export const addItem = createAction("ADDITEM");
-export const removeItem = createAction("REMOVEITEM");
+export const addItem = createAction("cart/addItem");
+export const removeItem = createAction("cart/removeItem");
+export const updateItemQuantity = createAction("cart/updateQuantity");
 
-// Reducer to handle actions related to the cart
 const cartReducer = createReducer(initialState, (builder) => {
-  builder.addCase(addItem, (state, action) => {
-    state.cartItems.push(action.payload);
-    state.cartCount += 1;
-  });
+  builder
+    .addCase(addItem, (state, action) => {
+      const item = action.payload;
+      const existingItem = state.cartItems.find((i) => i.id === item.id);
 
-  builder.addCase(removeItem, (state, action) => {
-    state.cartItems.pop(action.payload);
-    state.cartCount -= 1;
-  });
+      // If item is already added it will increase the count else add new product
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.cartItems.push({ ...item, quantity: 1 });
+      }
+
+      state.cartCount += 1;
+    })
+
+    .addCase(removeItem, (state, action) => {
+      const item = action.payload;
+      const existingItem = state.cartItems.find((i) => i.id === item.id);
+
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+          state.cartCount -= 1;
+        } else {
+          // If only 1 left, remove the item completely
+          state.cartItems = state.cartItems.filter((i) => i.id !== item.id);
+          state.cartCount -= 1;
+        }
+      }
+    })
+
+    .addCase(updateItemQuantity, (state, action) => {
+      const { id, quantity } = action.payload;
+      const item = state.cartItems.find((i) => i.id === id);
+      if (item) {
+        // Update global count based on change in quantity
+        const diff = quantity - item.quantity;
+        item.quantity = quantity;
+        state.cartCount += diff;
+      }
+    });
 });
 
 export default cartReducer;
