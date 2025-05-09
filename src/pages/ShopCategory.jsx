@@ -7,6 +7,7 @@ const ShopCategory = () => {
 
   const handleAddToCart = (product) => {
     // Dispatch the addItem action with the product as payload
+
     dispatch(addItem(product));
   };
 
