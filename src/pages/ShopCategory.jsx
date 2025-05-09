@@ -14,7 +14,7 @@ const ShopCategory = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("/api/products")
       .then((response) => response.json())
       .then((data) => setProducts(data)); // Set fetched products to state
   }, []);
