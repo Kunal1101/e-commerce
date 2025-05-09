@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/cart";
 
 const ShopCategory = () => {
+  const dispatch = useDispatch(); // Access dispatch
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -30,8 +34,11 @@ const ShopCategory = () => {
               <p className="text-gray-600 text-sm mt-2 line-clamp-3">
                 {product.description}
               </p>
-              <button className="mt-4 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
-                Buy Now
+              <button
+                onClick={() => dispatch(addItem())}
+                className="mt-4 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+              >
+                Add To Cart
               </button>
             </div>
           </div>
