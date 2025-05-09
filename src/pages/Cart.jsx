@@ -8,7 +8,6 @@ const Cart = () => {
   if (!cartItems || cartItems.length === 0) {
     return <p>No items in the cart.</p>; // Fallback message if cart is empty or undefined
   }
-  console.log(cartItems);
 
   return (
     <div>
