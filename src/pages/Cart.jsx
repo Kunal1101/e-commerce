@@ -1,16 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../store/cart";
 
 const Cart = () => {
   // Access cartItems from the Redux store
   const cartItems = useSelector((state) => state.cartItems); // Ensure correct path
+  const dispatch = useDispatch();
 
   if (!cartItems || cartItems.length === 0) {
     return <p>No items in the cart.</p>; // Fallback message if cart is empty or undefined
   }
 
-  const removeFromCart = (id) => {
-    setCart(cartItems.filter((item) => item.id !== id));
+  const removeFromCart = (item) => {
+    dispatch(removeItem(item));
   };
 
   const updateQuantity = (id, newQuantity) => {
@@ -71,8 +73,8 @@ const Cart = () => {
                 </td> */}
                 <td className="py-3 px-4">
                   <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                    onClick={() => removeFromCart(item)}
+                    className="bg-red-500 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-red-600"
                   >
                     Remove
                   </button>
