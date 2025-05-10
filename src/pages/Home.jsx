@@ -2,7 +2,7 @@ import React from "react";
 import useProducts from "../components/ProductsData";
 
 const Home = () => {
-  const { products, loading, error } = useProducts(); // <-- Use the custom hook here
+  const { products, loading, error } = useProducts("6");
 
   const handleAddToCart = (product) => {
     dispatch(addItem(product));

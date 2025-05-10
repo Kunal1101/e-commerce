@@ -5,7 +5,7 @@ import useProducts from "../components/ProductsData";
 
 const ShopCategory = () => {
   const dispatch = useDispatch();
-  const { products, loading, error } = useProducts(); // <-- Use the custom hook here
+  const { products, loading, error } = useProducts();
 
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
