@@ -5,8 +5,8 @@ console.log(API_URL);
 
 const useProducts = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // Optional: loading state
-  const [error, setError] = useState(null); // Optional: error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,7 +25,7 @@ const useProducts = () => {
     };
 
     fetchProducts();
-  }, []); // 🔁 re-run if category changes
+  }, []);
 
   return { products, loading, error };
 };
