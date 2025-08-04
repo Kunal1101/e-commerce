@@ -28,10 +28,10 @@ const Navbar = () => {
       </div>
       <div className="login-cart flex items-center gap-3 relative">
         <Link
-          to="/login"
+          to="/signup"
           className="cursor-pointer rounded-4xl bg-white px-8 py-2 text-black"
         >
-          Login
+          Signup
         </Link>
         <Link to="/cart">
           <img className="cursor-pointer pr-3" src={cart} alt="" />
